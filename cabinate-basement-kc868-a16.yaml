@@ -1,0 +1,326 @@
+esphome:
+  name: schaltbox-schaltschrank-keller
+  friendly_name: Schaltbox_Schaltschrank_Keller
+  platform: ESP32
+  board: esp32dev
+
+# Example configuration entry for ESP32
+i2c:
+  sda: 4
+  scl: 5
+  scan: true
+  id: bus_a
+
+# Example configuration entry
+ethernet:
+  type: LAN8720
+  mdc_pin: GPIO23
+  mdio_pin: GPIO18
+  clk_mode: GPIO17_OUT
+  phy_addr: 0
+
+# Optional manual IP
+# manual_ip:
+#   static_ip: 192.168.1.199
+#   gateway: 192.168.1.1
+#   subnet: 255.255.255.0
+
+# Example configuration entry
+pcf8574:
+  - id: 'pcf8574_hub_out_1' # for output channel 1-8
+    address: 0x24
+
+  - id: 'pcf8574_hub_out_2' # for output channel 9-16
+    address: 0x25
+
+  - id: 'pcf8574_hub_in_1' # for input channel 1-8
+    address: 0x21
+
+  - id: 'pcf8574_hub_in_2' # for input channel 9-16
+    address: 0x22
+
+# Individual outputs
+button:
+  - platform: template
+    name: "Dooropener"
+    on_press: 
+      then:
+        - switch.turn_on: Dooropener
+        - delay: 3s
+        - switch.turn_off: Dooropener
+
+switch:
+  - platform: gpio
+    id: Doorbell
+    name: “Doorbell”
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 0
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    id: "Dooropener"
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 1
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: “Doorbell-Light”
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 2
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: “light4”
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 3
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: “light5”
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 4
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: “light6”
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 5
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: “light7”
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 6
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: “light8”
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 7
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: “light9”
+    pin:
+      pcf8574: pcf8574_hub_out_2
+      number: 0
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: “light10”
+    pin:
+      pcf8574: pcf8574_hub_out_2
+      number: 1
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: “light11”
+    pin:
+      pcf8574: pcf8574_hub_out_2
+      number: 2
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: “light12”
+    pin:
+      pcf8574: pcf8574_hub_out_2
+      number: 3
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: “light13”
+    pin:
+      pcf8574: pcf8574_hub_out_2
+      number: 4
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: “light14”
+    pin:
+      pcf8574: pcf8574_hub_out_2
+      number: 5
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: “light15”
+    pin:
+      pcf8574: pcf8574_hub_out_2
+      number: 6
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: “light16”
+    pin:
+      pcf8574: pcf8574_hub_out_2
+      number: 7
+      mode: OUTPUT
+      inverted: true
+
+binary_sensor:
+  - platform: gpio
+    name: “Doorbell-Button”
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 0
+      mode: INPUT
+      inverted: true
+    on_press: 
+      then:
+        - switch.turn_on: Doorbell
+        - delay: 2s
+        - switch.turn_off: Doorbell
+
+  - platform: gpio
+    name: “input2”
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 1
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: “input3”
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 2
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: “input4”
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 3
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: “input5”
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 4
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: “input6”
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 5
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: “input7”
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 6
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: “input8”
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 7
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: “input9”
+    pin:
+      pcf8574: pcf8574_hub_in_2
+      number: 0
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: “input10”
+    pin:
+      pcf8574: pcf8574_hub_in_2
+      number: 1
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: “input11”
+    pin:
+      pcf8574: pcf8574_hub_in_2
+      number: 2
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: “input12”
+    pin:
+      pcf8574: pcf8574_hub_in_2
+      number: 3
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: “input13”
+    pin:
+      pcf8574: pcf8574_hub_in_2
+      number: 4
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: “input14”
+    pin:
+      pcf8574: pcf8574_hub_in_2
+      number: 5
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: “input15”
+    pin:
+      pcf8574: pcf8574_hub_in_2
+      number: 6
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: “input16”
+    pin:
+      pcf8574: pcf8574_hub_in_2
+      number: 7
+      mode: INPUT
+      inverted: true
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "81OkYxGR6lpsp+aig4J95LvuVmsuEYTvya7UFLmIv1s="
+
+ota:
+  - platform: esphome
+    password: "9d98d62ea08ccdb02aa62cc0819f5885"
