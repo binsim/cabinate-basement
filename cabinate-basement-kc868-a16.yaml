@@ -30,23 +30,23 @@ ethernet:
 
 # Example configuration entry
 pcf8574:
-  - id: 'pcf8574_hub_out_1' # for output channel 1-8
+  - id: "pcf8574_hub_out_1" # for output channel 1-8
     address: 0x24
 
-  - id: 'pcf8574_hub_out_2' # for output channel 9-16
+  - id: "pcf8574_hub_out_2" # for output channel 9-16
     address: 0x25
 
-  - id: 'pcf8574_hub_in_1' # for input channel 1-8
+  - id: "pcf8574_hub_in_1" # for input channel 1-8
     address: 0x21
 
-  - id: 'pcf8574_hub_in_2' # for input channel 9-16
+  - id: "pcf8574_hub_in_2" # for input channel 9-16
     address: 0x22
 
 # Individual outputs
 button:
   - platform: template
     name: "Dooropener"
-    on_press: 
+    on_press:
       then:
         - switch.turn_on: Dooropener
         - delay: 3s
@@ -190,7 +190,7 @@ binary_sensor:
       number: 0
       mode: INPUT
       inverted: true
-    on_press: 
+    on_press:
       then:
         - switch.turn_on: Doorbell
         - delay: 2s
