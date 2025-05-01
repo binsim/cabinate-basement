@@ -10,11 +10,11 @@ permissions:
 jobs:
   build-firmware:
     name: Build Firmware
-    uses: esphome/workflows/.github/workflows/build.yml@2025.1.0
+    uses: esphome/workflows/.github/workflows/build.yml@2025.4.0
     with:
       files: |
         cabinate-basement-kc868-a16.yaml
-      esphome-version: 2025.3.3
+      esphome-version: 2025.4.0
       combined-name: cabinate-basement
 
       release-summary: ${{ github.event.release.body }}
